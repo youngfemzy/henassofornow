@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ============ MULTI-VIEW CAROUSEL ============
-  (function() {
+  (function () {
     var carousel = document.getElementById('servicesCarousel');
     if (!carousel) return;
 
@@ -147,30 +147,30 @@ document.addEventListener('DOMContentLoaded', () => {
       if (index > items.length - visibleCount) index = items.length - visibleCount;
       var itemW = items[0].offsetWidth + gap;
       inner.style.transform = 'translateX(' + (-index * itemW) + 'px)';
-      items.forEach(function(item, i) {
+      items.forEach(function (item, i) {
         item.classList.toggle('active', i === index);
       });
-      dots.forEach(function(dot, i) {
+      dots.forEach(function (dot, i) {
         dot.classList.toggle('active', i === index);
       });
     }
 
     var currentIndex = 0;
 
-    carousel.querySelector('.slider-prev').addEventListener('click', function() {
+    carousel.querySelector('.slider-prev').addEventListener('click', function () {
       currentIndex--;
       if (currentIndex < 0) currentIndex = items.length - visibleCount;
       slideTo(currentIndex);
     });
 
-    carousel.querySelector('.slider-next').addEventListener('click', function() {
+    carousel.querySelector('.slider-next').addEventListener('click', function () {
       currentIndex++;
       if (currentIndex > items.length - visibleCount) currentIndex = 0;
       slideTo(currentIndex);
     });
 
-    dots.forEach(function(dot, i) {
-      dot.addEventListener('click', function() {
+    dots.forEach(function (dot, i) {
+      dot.addEventListener('click', function () {
         currentIndex = i;
         slideTo(currentIndex);
       });
@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
     var autoTimer = null;
     function startAuto() {
       stopAuto();
-      autoTimer = setInterval(function() {
+      autoTimer = setInterval(function () {
         currentIndex++;
         if (currentIndex > items.length - visibleCount) currentIndex = 0;
         slideTo(currentIndex);
@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
     carousel.addEventListener('mouseenter', stopAuto);
     carousel.addEventListener('mouseleave', startAuto);
 
-    window.addEventListener('resize', function() { slideTo(currentIndex); });
+    window.addEventListener('resize', function () { slideTo(currentIndex); });
 
     slideTo(0);
     startAuto();
@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ============ ACTIVE NAVIGATION STATE ON SCROLL ============
   const sections = document.querySelectorAll('section[id], footer[id]');
   const scrollLinks = document.querySelectorAll('.nav-links a[href^="#"]');
-  
+
   window.addEventListener('scroll', () => {
     let currentSectionId = '';
     const scrollPosition = window.scrollY + 150; // offset for nav
@@ -265,7 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ============ COUNTER ANIMATION FOR ALL + NUMBERS ============
   const counters = document.querySelectorAll('.counter');
-  
+
   const counterObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const progress = Math.min((timestamp - startTime) / duration, 1);
           const eased = 1 - Math.pow(1 - progress, 3);
           counter.textContent = Math.floor(eased * target);
-          
+
           if (progress < 1) {
             window.requestAnimationFrame(animate);
           } else {
@@ -303,24 +303,24 @@ document.addEventListener('DOMContentLoaded', () => {
     entries.forEach(entry => {
       if (entry.isIntersecting && !gaugesAnimated) {
         gaugesAnimated = true;
-        
+
         gauges.forEach(gauge => {
           const targetValue = parseInt(gauge.getAttribute('data-value'), 10);
           const fill = gauge.querySelector('.gauge-fill');
           const countSpan = gauge.querySelector('.gauge-count');
-          
+
           // Animate SVG stroke offset
           // Total circumference of circle radius 45 is 2 * Math.PI * 45 = ~282.7
           const circumference = 282.7;
-          
+
           // Determine percentage value for gauge dial fill (from 0 to 100)
           let fillPercentage = targetValue;
           if (targetValue === 10) fillPercentage = 85; // Boost visualization on layout
           if (targetValue === 3) fillPercentage = 60;  // Boost visualization on layout
           if (targetValue === 100) fillPercentage = 95;
-          
+
           const strokeOffset = circumference - (fillPercentage / 100) * circumference;
-          
+
           // Trigger stroke-dashoffset transition
           setTimeout(() => {
             fill.style.strokeDashoffset = strokeOffset;
@@ -336,7 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const progress = Math.min((timestamp - countStartTimestamp) / countDuration, 1);
             const eased = 1 - Math.pow(1 - progress, 3);
             countSpan.textContent = Math.floor(eased * targetValue);
-            
+
             if (progress < 1) {
               window.requestAnimationFrame(countStep);
             } else {
@@ -363,7 +363,7 @@ document.addEventListener('DOMContentLoaded', () => {
     card.addEventListener('click', (e) => {
       // Avoid interference if clicking a sub-link (if any existed)
       const isActive = card.classList.contains('active');
-      
+
       // Close all cards
       serviceCards.forEach(c => {
         c.classList.remove('active');
@@ -384,9 +384,9 @@ document.addEventListener('DOMContentLoaded', () => {
       e.stopPropagation(); // prevent card click bubble
       const card = toggle.closest('.project-card');
       const textSpan = toggle.querySelector('.toggle-text');
-      
+
       card.classList.toggle('open');
-      
+
       if (card.classList.contains('open')) {
         textSpan.textContent = 'Collapse';
       } else {

@@ -748,7 +748,7 @@ h6 {
   }
 
   .about-features-flex {
-    flex-direction: column;
+    /* flex-direction: column; */
     gap: 24px;
   }
 
@@ -757,7 +757,7 @@ h6 {
   } */
 
   .about-feature-card p {
-    font-size: 18px;
+    font-size: 13px;
   }
 
   .about-checklist-flex {
